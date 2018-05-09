@@ -1,5 +1,5 @@
 -- region Remove test data
 
-DELETE * FROM Captains;
+DELETE FROM Captains;
 
 -- endregion
