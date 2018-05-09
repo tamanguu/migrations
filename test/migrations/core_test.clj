@@ -3,7 +3,8 @@
             [clojure.test.tap :refer [print-tap-fail]]
             [environ.core :refer [env]]
             [taoensso.timbre :as timbre]
-            [conman.core :as conman]))
+            [conman.core :as conman]
+            [clojure.data.json :as json]))
 
 ;; region Database connection and fixtures
 
