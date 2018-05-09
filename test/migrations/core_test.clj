@@ -53,11 +53,11 @@
 
         (condp = db-version
           "1.0" (do
-                  (is (= 4 (count tos)))
+                  (is (= 5 (count tos)))
                   (is (= "James T. Kirk" (:captain tos)))
                   (is (nil? (:object tos))))
           "2.0" (do
-                  (is (= 5 (count tos)))
+                  (is (= 6 (count tos)))
                   (is (= "James T. Kirk" (:captain tos)))
                   (is (= "starship" (:object tos))))
           (print-tap-fail "unknown version number"))))

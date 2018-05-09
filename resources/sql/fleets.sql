@@ -10,10 +10,10 @@ SELECT * FROM Captains;
 
 -- :name get-starships :? :*
 -- :doc Return all starships
-SELECT * FROM Starships;
+SELECT *, (SELECT Captains.name FROM Captains WHERE Starships.captainID = Captains.captainID) AS captain FROM Starships;
 
 -- :name get-fleets :? :*
 -- :doc Return all fleets
-SELECT *, ARRAY(SELECT starshipID FROM ShipsInFleet WHERE ShipsInFleet.starshipID = Starship.starshipID) AS ships FROM Fleets;
+SELECT *, ARRAY(SELECT starshipID FROM ShipsInFleet WHERE ShipsInFleet.fleetID = Fleets.fleetID) AS ships FROM Fleets;
 
 -- endregion
