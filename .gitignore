@@ -11,18 +11,9 @@ pom.xml.asc
 /.repl
 /log/
 /out/
-/resources/public/js/compiled/**
-/resources/public/css
-figwheel_server.log
 /.idea
 *.iml
 node_modules/
 .vscode/
-resources/public/css/
-/test2junit/
 /build.xml
 package.json
-
-# Ignore configuration files with credentials data
-scripts/mail-env.sh
-scripts/*.gpg
