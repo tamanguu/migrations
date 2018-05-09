@@ -25,7 +25,8 @@
                  [migratus "1.0.6"]
                  [com.fzakaria/slf4j-timbre "0.3.2"]
                  [environ "1.1.0"]
-                 [eftest "0.5.1"]]
+                 [eftest "0.5.1"]
+                 [org.clojure/data.json "0.2.6"]]
   :main ^:skip-aot migrations.core
 
   ;; File paths
