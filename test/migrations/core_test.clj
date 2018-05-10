@@ -1,6 +1,5 @@
 (ns migrations.core-test
   (:require [clojure.test :refer :all]
-            [clojure.test.tap :refer [print-tap-fail]]
             [environ.core :refer [env]]
             [taoensso.timbre :as timbre]
             [clojure.data.json :as json]
@@ -37,7 +36,7 @@
           "1.0" (do
                   (is (= 3 (count jim)))
                   (is (nil? (:object jim))))
-          (print-tap-fail "unknown version number"))))
+          (is false))))
 
     (testing "starships table"
       (let [ships (get-starships)
@@ -52,7 +51,7 @@
                   (is (= 4 (count tos)))
                   (is (= "James T. Kirk" (:captain tos)))
                   (is (nil? (:object tos))))
-          (print-tap-fail "unknown version number"))))
+          (is false))))
 
     (testing "fleets table"
       (let [fleets    (get-fleets)
@@ -77,6 +76,6 @@
                   (is (nil? (:object starfleet)))
                   (is (= [{:priority "urgent", :objective "Overthrow Palpatine"}
                           {:priority "trivial", :objective "Destroy Klingon Empire"}] orders)))
-          (print-tap-fail "unknown version number"))))))
+          (is false))))))
 
 ;; endregion
