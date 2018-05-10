@@ -4,6 +4,10 @@
 -- :doc Return the schema version as a string
 SELECT version FROM FleetSchema;
 
+-- :name set-version! :! :n
+-- :doc Set a new schema version string
+UPDATE FleetSchema SET version=:version WHERE version IS NOT NULL;
+
 -- :name get-captains :? :*
 -- :doc Return all captains
 SELECT * FROM Captains;
