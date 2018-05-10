@@ -20,4 +20,8 @@ SELECT *, (SELECT Captains.name FROM Captains WHERE Starships.captainID = Captai
 -- :doc Return all fleets
 SELECT *, ARRAY(SELECT starshipID FROM ShipsInFleet WHERE ShipsInFleet.fleetID = Fleets.fleetID) AS ships FROM Fleets;
 
+-- :name set-fleet-orders! :! :n
+-- :doc Update the orders of an existing fleet, return the number of rows affected
+UPDATE Fleets SET orders=:orders::JSONB[] WHERE fleetID=:fleetid;
+
 -- endregion
