@@ -19,8 +19,8 @@
 (deftest db-version-test
   (testing "compatible database version"
     (is (let [db-version (:version (get-version))]
-          (or (= "1.0" db-version)
-              (= "2.0" db-version))))))
+          (or (= "2.0" db-version)
+              (= "3.0" db-version)))))) ; Support for "1.0" has been dropped
 
 (deftest content-test
   (let [db-version (:version (get-version))]
@@ -33,14 +33,11 @@
         (is (= 2 (count captains)))
         (is (not (nil? jim)))
 
-        (condp = db-version
-          "1.0" (do
-                  (is (= 3 (count jim)))
-                  (is (nil? (:object jim))))
-          "2.0" (do
-                  (is (= 4 (count jim)))
-                  (is (= "captain" (:object jim))))
-          (is false))))
+        (cond
+          (contains? #{"2.0" "3.0"} db-version) (do
+                                                  (is (= 4 (count jim)))
+                                                  (is (= "captain" (:object jim))))
+          :else (is false))))
 
     (testing "starships table"
       (let [ships (get-starships)
@@ -50,16 +47,12 @@
         (is (= 2 (count ships)))
         (is (not (nil? tos)))
 
-        (condp = db-version
-          "1.0" (do
-                  (is (= 5 (count tos)))
-                  (is (= "James T. Kirk" (:captain tos)))
-                  (is (nil? (:object tos))))
-          "2.0" (do
-                  (is (= 6 (count tos)))
-                  (is (= "James T. Kirk" (:captain tos)))
-                  (is (= "starship" (:object tos))))
-          (is false))))
+        (cond
+          (contains? #{"2.0" "3.0"} db-version) (do
+                                                  (is (= 6 (count tos)))
+                                                  (is (= "James T. Kirk" (:captain tos)))
+                                                  (is (= "starship" (:object tos))))
+          :else (is false))))
 
     (testing "fleets table"
       (let [fleets    (get-fleets)
@@ -79,16 +72,16 @@
         (is (not (nil? starfleet)))
 
         (condp = db-version
-          "1.0" (do
-                  (is (= 6 (count starfleet)))
-                  (is (nil? (:object starfleet)))
-                  (is (= [{:priority "urgent", :objective "Overthrow Palpatine"}
-                          {:priority "trivial", :objective "Destroy Klingon Empire"}] orders)))
           "2.0" (do
                   (is (= 7 (count starfleet)))
                   (is (= "fleet" (:object starfleet)))
                   (is (= [{:priority "urgent", :objective "Overthrow Palpatine"}
                           {:priority "trivial", :objective "Destroy Klingon Empire"}] orders)))
+          "3.0" (do
+                  (is (= 7 (count starfleet)))
+                  (is (= "fleet" (:object starfleet)))
+                  (is (= [{:is-nonsense? true :ignore-me "urgent" :priority "HIGHEST" :purpose "Overthrow Palpatine"}
+                          {:is-nonsense? false :ignore-me "trivial" :priority "HIGHEST" :purpose "Destroy Klingon Empire"}] orders)))
           (is false))))))
 
 ;; endregion
