@@ -1,0 +1,7 @@
+;; region Define a code-based migration for changing the @p orders JSON schema and content
+
+{:ns      migrations.clean-up-orders
+ :up-fn   migrate-up
+ :down-fn migrate-down}
+
+;; endregion
