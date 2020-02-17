@@ -102,7 +102,5 @@ The following licensing conditions and notices apply.
 
 ### License
 
-Copyright © since 2018 Tamanguu GmbH & Co KG
+Copyright © since 2018 Tamanguu GmbH & Co KG, see `LICENSE.md`.
 
-The project uses a commercial, proprietary license, see `LICENSE.md`
-distributed together with this project.
